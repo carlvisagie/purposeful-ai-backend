@@ -1,1 +1,1 @@
-# Purposeful Live Coaching Platform
+# Purposeful Live Coaching Platform - Your Path to Wellness
