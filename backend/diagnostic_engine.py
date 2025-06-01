@@ -1,4 +1,4 @@
-from backend.flag_matrix import FLAG_MATRIX
+from flag_matrix import FLAG_MATRIX
 
 def diagnose_client_responses(text_input):
     profile = {k: [] for k in FLAG_MATRIX}
