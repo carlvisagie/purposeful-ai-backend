@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from diagnostic_engine import diagnose_client_responses
+from backend.diagnostic_engine import diagnose_client_responses
 from mortality_screen import calculate_mortality_risk
 from tier_validator import is_tier_mismatch
 from missing_info_warning import check_missing_info
