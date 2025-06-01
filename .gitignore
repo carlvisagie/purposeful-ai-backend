@@ -1,0 +1,3 @@
+git remote -v
+git remote add origin https://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@github.com/carlvisagie/purposeful-ai-backend.git
+cd C:\Projects\PurposefulLive

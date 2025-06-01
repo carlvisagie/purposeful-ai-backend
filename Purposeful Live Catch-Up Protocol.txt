@@ -1,0 +1,66 @@
+CATCH-UP PROTOCOL: PURPOSEFUL LIVE PLATFORM LAUNCH
+
+✅ GOAL:
+Launch the Purposeful Live Coaching Platform fully online with:
+- AI diagnostic engine
+- 100% client onboarding
+- Revenue processing
+- Hosting, dashboards, domain connection
+
+✅ REQUIRED FOLDERS:
+- /frontend
+- /backend
+- /test
+- /docs
+- /deploy
+
+✅ REQUIRED FILES:
+> In /backend:
+- ai_api.py
+- diagnostic_engine.py
+- mortality_screen.py
+- tier_validator.py
+- missing_info_warning.py
+- flag_matrix.py
+- run_full_diagnostic.py
+- requirements.txt
+
+> In /frontend:
+- index.html
+- app.js
+- style.css
+- client/submit.html
+- coach/dashboard.html
+- admin/index.html
+
+✅ DEPLOYMENT TARGETS:
+- Backend → Render.com
+- Frontend → GitHub Pages or Vercel
+- Domain → purposefullivecoaching.com
+
+✅ LOCAL TEST COMMANDS:
+- Run backend:
+  C:/Projects/PurposefulLive/venv/Scripts/python.exe ai_api.py
+- Open frontend:
+  Open index.html in browser and test submit
+
+✅ TODO CHECKLIST:
+⬜ Push backend to GitHub
+⬜ Deploy backend to Render
+⬜ Deploy frontend to GitHub Pages or Vercel
+⬜ Link frontend to live backend URL
+⬜ Test full client onboarding loop
+⬜ Integrate Stripe or Paddle for payments
+⬜ Add coach/admin login (optional)
+⬜ Enable session logs / tracking (optional)
+
+✅ AI ACCESS / TOKEN RULE:
+Before any task involving APIs, deployment, GitHub, Stripe, Vercel, or Render:
+- Always check for a valid, active token or credential
+- If no token is stored or it’s expired, **ask the user immediately**
+- Never proceed with partial or assumed permissions
+- Stored GitHub token (valid unless revoked): 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
+- Other keys must be verified before executing tasks that require secure access
+
+✅ WHEN I RETURN, TYPE:
+“Catch me up using PLCP”
