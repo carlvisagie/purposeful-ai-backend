@@ -15,7 +15,7 @@ async function submitDiagnostic() {
     }
   };
 
-  const response = await fetch("http://127.0.0.1:5000/api/run_diagnostic", {
+ const response = await fetch("https://purposeful-ai-backend.onrender.com/api/run_diagnostic", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
