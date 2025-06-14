@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-
+from routes.ai import ai
 from diagnostic_engine import diagnose_client_responses
 from mortality_screen import calculate_mortality_risk
 from tier_validator import is_tier_mismatch
 from missing_info_warning import check_missing_info
+TIER_LINKS = {
+    "Shift Session": "https://paypal.me/purposefulshift/35",
+    "Clarity+": "https://paypal.me/purposefulclarity/75",
+    "Mastery": "https://paypal.me/purposefulmastery/195"
+}
 
 app = Flask(__name__)
 CORS(app)
@@ -13,6 +18,16 @@ CORS(app)
 @app.route("/")
 def index():
     return "✅ Purposeful Live API is running."
+@app.route("/api/get_payment_link", methods=["POST"])
+def get_payment_link():
+    data = request.get_json()
+    selected_tier = data.get("tier", "").strip()
+    payment_link = TIER_LINKS.get(selected_tier)
+
+    if not payment_link:
+        return jsonify({"error": "Invalid tier selected."}), 400
+
+    return jsonify({"tier": selected_tier, "payment_link": payment_link})
 
 @app.route("/api/run_diagnostic", methods=["POST"])
 def run_diagnostic():
