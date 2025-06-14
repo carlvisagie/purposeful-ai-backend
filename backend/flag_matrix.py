@@ -1,4 +1,4 @@
-FLAG_MATRIX = {
+FFLAG_MATRIX = {
     "mental_health": ["anxiety", "burnout", "overthinking", "depression", "negative self-talk"],
     "emotional": ["grief", "emotional regulation", "low self-esteem", "loneliness"],
     "spiritual": ["lack of purpose", "faith struggles", "existential crisis"],
