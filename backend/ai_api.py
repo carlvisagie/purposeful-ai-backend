@@ -14,7 +14,7 @@ TIER_LINKS = {
 
 app = Flask(__name__)
 CORS(app)
-
+app.register_blueprint(ai, url_prefix="/api/ai")
 @app.route("/")
 def index():
     return "✅ Purposeful Live API is running."
