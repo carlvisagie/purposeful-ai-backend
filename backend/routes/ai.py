@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.ai_engine import generate_ai_response
+from ai_engine import generate_ai_response
 
 ai = Blueprint('ai', __name__)
 
