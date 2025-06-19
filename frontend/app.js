@@ -15,7 +15,7 @@ async function submitDiagnostic() {
     }
   };
 
- const response = await fetch("https://purposeful-ai-backend.onrender.com/api/run_diagnostic", {
+  const response = await fetch("https://purposeful-ai-backend.onrender.com/api/run_diagnostic", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
@@ -30,3 +30,4 @@ async function submitDiagnostic() {
     <strong>⚠️ Missing Info:</strong> ${JSON.stringify(result.missing_info)}
   `;
 }
+
