@@ -4,7 +4,5 @@ FLAG_MATRIX = {
     "spiritual": ["lack of purpose", "faith struggles", "existential crisis"],
     "physical": ["chronic pain", "poor sleep", "fatigue", "weight issues"],
     "financial": ["debt", "instability", "financial anxiety", "income issues"],
-    "late_night_logins": {"severity": 2, "message": "Possible stress behavior"},
-    "missed_sessions": {"severity": 3, "message": "Client disengagement"},
-    "high_sentiment_swing": {"severity": 4, "message": "Emotional instability"}
+    "behavioral": ["late night logins", "missed sessions", "high sentiment swing"]
 }

@@ -57,9 +57,9 @@ Launch the Purposeful Live Coaching Platform fully online with:
 ✅ AI ACCESS / TOKEN RULE:
 Before any task involving APIs, deployment, GitHub, Stripe, Vercel, or Render:
 - Always check for a valid, active token or credential
-- If no token is stored or it’s expired, **ask the user immediately**
+- If no token is stored or it's expired, **ask the user immediately**
 - Never proceed with partial or assumed permissions
-- Stored GitHub token (valid unless revoked): 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
+- GitHub tokens should be provided securely when needed
 - Other keys must be verified before executing tasks that require secure access
 
 ✅ WHEN I RETURN, TYPE:
