@@ -3,11 +3,259 @@
 <head>
   <title>Admin Panel</title>
   <link rel="stylesheet" href="../style.css" />
+  <style>
+    .admin-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 20px 0; }
+    .admin-card { background: #f5f5f5; padding: 20px; border-radius: 8px; border: 1px solid #ddd; }
+    .system-stats { background: #e3f2fd; border-color: #2196f3; }
+    .user-management { background: #f3e5f5; border-color: #9c27b0; }
+    .crisis-management { background: #ffebee; border-color: #f44336; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+    .stat-item { background: white; padding: 10px; border-radius: 4px; text-align: center; }
+    .user-list { max-height: 400px; overflow-y: auto; }
+    .user-item { padding: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .crisis-item { padding: 10px; border-bottom: 1px solid #eee; margin: 5px 0; }
+    .severity-5 { border-left: 4px solid #f44336; background: #ffebee; }
+    .severity-4 { border-left: 4px solid #ff9800; background: #fff3e0; }
+    .severity-3 { border-left: 4px solid #ffc107; background: #fffde7; }
+    .btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; margin: 2px; font-size: 12px; }
+    .btn-primary { background: #2196f3; color: white; }
+    .btn-success { background: #4caf50; color: white; }
+    .btn-danger { background: #f44336; color: white; }
+    .btn-warning { background: #ff9800; color: white; }
+    .role-badge { padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+    .role-admin { background: #f44336; color: white; }
+    .role-coach { background: #2196f3; color: white; }
+    .role-client { background: #4caf50; color: white; }
+    .tabs { display: flex; border-bottom: 1px solid #ddd; margin-bottom: 20px; }
+    .tab { padding: 10px 20px; cursor: pointer; border-bottom: 2px solid transparent; }
+    .tab.active { border-bottom-color: #2196f3; background: #f0f8ff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Admin Dashboard</h1>
-    <p>Manage system access, user roles, analytics, and platform settings here.</p>
+    
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('overview')">Overview</div>
+      <div class="tab" onclick="showTab('users')">User Management</div>
+      <div class="tab" onclick="showTab('crises')">Crisis Management</div>
+      <div class="tab" onclick="showTab('system')">System Settings</div>
+    </div>
+
+    <div id="overview" class="tab-content active">
+      <div class="admin-card system-stats">
+        <h2>System Statistics</h2>
+        <div class="stats-grid" id="system-stats">
+          <div class="stat-item">
+            <h3 id="total-users">0</h3>
+            <p>Total Users</p>
+          </div>
+          <div class="stat-item">
+            <h3 id="total-clients">0</h3>
+            <p>Clients</p>
+          </div>
+          <div class="stat-item">
+            <h3 id="total-coaches">0</h3>
+            <p>Coaches</p>
+          </div>
+          <div class="stat-item">
+            <h3 id="total-sessions">0</h3>
+            <p>Sessions</p>
+          </div>
+          <div class="stat-item">
+            <h3 id="total-crises">0</h3>
+            <p>Total Crises</p>
+          </div>
+          <div class="stat-item">
+            <h3 id="unresolved-crises">0</h3>
+            <p>Unresolved</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="users" class="tab-content">
+      <div class="admin-card user-management">
+        <h2>User Management</h2>
+        <div class="user-list" id="user-list">
+          <p>Loading users...</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="crises" class="tab-content">
+      <div class="admin-card crisis-management">
+        <h2>All Crisis Events</h2>
+        <div class="user-list" id="crisis-list">
+          <p>Loading crisis events...</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="system" class="tab-content">
+      <div class="admin-card">
+        <h2>System Settings</h2>
+        <button class="btn btn-primary" onclick="refreshAllData()">Refresh All Data</button>
+        <button class="btn btn-warning" onclick="exportSystemReport()">Export System Report</button>
+        <button class="btn btn-danger" onclick="viewSystemLogs()">View System Logs</button>
+      </div>
+    </div>
   </div>
+
+  <script>
+    let authToken = localStorage.getItem('authToken');
+    
+    async function fetchWithAuth(url, options = {}) {
+      const response = await fetch(url, {
+        ...options,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+          ...options.headers
+        }
+      });
+      return response;
+    }
+
+    function showTab(tabName) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById(tabName).classList.add('active');
+      
+      if (tabName === 'overview') loadSystemStats();
+      if (tabName === 'users') loadUsers();
+      if (tabName === 'crises') loadAllCrises();
+    }
+
+    async function loadSystemStats() {
+      try {
+        const response = await fetchWithAuth('/api/admin/system-stats');
+        const data = await response.json();
+        
+        document.getElementById('total-users').textContent = data.users.total;
+        document.getElementById('total-clients').textContent = data.users.clients;
+        document.getElementById('total-coaches').textContent = data.users.coaches;
+        document.getElementById('total-sessions').textContent = data.sessions.total;
+        document.getElementById('total-crises').textContent = data.crises.total;
+        document.getElementById('unresolved-crises').textContent = data.crises.unresolved;
+      } catch (error) {
+        console.error('Error loading system stats:', error);
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const response = await fetchWithAuth('/api/admin/users');
+        const users = await response.json();
+        
+        const container = document.getElementById('user-list');
+        if (users.length === 0) {
+          container.innerHTML = '<p>No users found</p>';
+          return;
+        }
+        
+        container.innerHTML = users.map(user => `
+          <div class="user-item">
+            <div>
+              <strong>${user.email}</strong>
+              <span class="role-badge role-${user.role}">${user.role}</span>
+              <br><small>Joined: ${new Date(user.created_at).toLocaleDateString()}</small>
+              <br><span style="color: ${user.is_active ? 'green' : 'red'}">${user.is_active ? 'Active' : 'Inactive'}</span>
+            </div>
+            <div>
+              <select onchange="updateUserRole(${user.id}, this.value)">
+                <option value="client" ${user.role === 'client' ? 'selected' : ''}>Client</option>
+                <option value="coach" ${user.role === 'coach' ? 'selected' : ''}>Coach</option>
+                <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
+              </select>
+              <button class="btn btn-danger" onclick="deactivateUser(${user.id})">Deactivate</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading users:', error);
+      }
+    }
+
+    async function loadAllCrises() {
+      try {
+        const response = await fetchWithAuth('/api/admin/crisis-events/all');
+        const events = await response.json();
+        
+        const container = document.getElementById('crisis-list');
+        if (events.length === 0) {
+          container.innerHTML = '<p>No crisis events found</p>';
+          return;
+        }
+        
+        container.innerHTML = events.map(event => `
+          <div class="crisis-item severity-${event.severity}">
+            <strong>User ${event.user_id}</strong> - Severity ${event.severity}
+            ${event.resolved ? '<span style="color: green;">[RESOLVED]</span>' : '<span style="color: red;">[ACTIVE]</span>'}
+            <br><small>${new Date(event.created_at).toLocaleString()}</small>
+            <br><em>${event.flags.slice(0, 3).join(', ')}</em>
+            ${event.escalated ? '<br><strong style="color: red;">ESCALATED</strong>' : ''}
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error('Error loading crisis events:', error);
+      }
+    }
+
+    async function updateUserRole(userId, newRole) {
+      try {
+        const response = await fetchWithAuth(`/api/admin/users/${userId}/role`, {
+          method: 'PUT',
+          body: JSON.stringify({ role: newRole })
+        });
+        
+        if (response.ok) {
+          alert('User role updated successfully');
+          loadUsers();
+        }
+      } catch (error) {
+        console.error('Error updating user role:', error);
+      }
+    }
+
+    async function deactivateUser(userId) {
+      if (!confirm('Are you sure you want to deactivate this user?')) return;
+      
+      try {
+        const response = await fetchWithAuth(`/api/admin/users/${userId}/deactivate`, {
+          method: 'POST'
+        });
+        
+        if (response.ok) {
+          alert('User deactivated successfully');
+          loadUsers();
+        }
+      } catch (error) {
+        console.error('Error deactivating user:', error);
+      }
+    }
+
+    function refreshAllData() {
+      loadSystemStats();
+      loadUsers();
+      loadAllCrises();
+    }
+
+    function exportSystemReport() {
+      alert('System report export functionality would be implemented here');
+    }
+
+    function viewSystemLogs() {
+      alert('System logs viewer would be implemented here');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSystemStats();
+    });
+  </script>
 </body>
 </html>
