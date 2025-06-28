@@ -1,7 +1,10 @@
 import os
 from openai import OpenAI
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise ValueError("OPENAI_API_KEY environment variable is required")
+client = OpenAI(api_key=api_key)
 
 def generate_ai_response(prompt: str) -> str:
     response = client.chat.completions.create(
