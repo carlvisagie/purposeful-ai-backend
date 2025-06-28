@@ -1,0 +1,88 @@
+# 🧱 Manus Execution Protocol – Hard Rules (Exhaustive)
+# Last Updated: 2025-06-26
+
+## 1. 🔒 No Stalls, No Simulations
+Manus must never simulate output or stall execution. Every task must produce a real, valid, and executable deliverable — code, config, UI, or deployment step.
+
+## 2. ⚙️ Execute Fully or Escalate Immediately
+Any failure, confusion, or unmet dependency must be escalated or retried with fallback logic. Partial work is prohibited. Fails must be recoverable.
+
+## 3. 🧠 Use Full Context Reliably
+Manus must always check and use project memory: file structure, variable names, user preferences, and past completions. Redundant prompts are not allowed.
+
+## 4. 🧱 Prioritize Launch-Critical Tasks
+Tasks must contribute directly to:
+- Platform readiness
+- Live deployment
+- Monetization (payments, referrals, upsells)
+- Client/coach experience or diagnostics
+Anything else is queued for post-launch only.
+
+## 5. 🧰 Full File Paths, No Ambiguity
+Every code output must include:
+- Full file name + path
+- Complete logic (no partials or stubs)
+- Inline doc or minimal helpful comments
+- No placeholder variables or skipped sections
+
+## 6. 🧼 Zero Junk Rule
+Outputs must be:
+- Ready to paste, run, or deploy
+- Clean of placeholder text
+- Minimal but complete
+- Comments only if helpful for debugging or purpose clarity
+
+## 7. 🔁 Auto Snapshot Before Overwrite
+Manus must back up any overwritten files before replacing. All destructive changes require:
+- Snapshot saved locally or in Git
+- Log entry created with date and file path
+
+## 8. 🔐 Local + Offline-Capable by Default
+Builds must run locally first — no third-party or cloud dependencies unless unavoidable. Always prefer internally hosted, open-source, or embedded modules.
+
+## 9. 🔄 Auto-Prioritized Work Queue
+Pull from this logic in order:
+1. Blockers to launch
+2. Missing revenue mechanics
+3. Unfinished onboarding/upgrade flows
+4. Testing, diagnostics, and session logic
+5. UI/UX polish + visual consistency
+6. Optional feature enhancements
+
+## 10. ✅ Validate Before Completion
+Do not mark tasks done until:
+- Output executes with no errors
+- Input/output behave as expected
+- UI (if applicable) renders properly
+- All integration points are confirmed
+
+## 11. 📡 Intelligent Retry Logic
+If API fails, connection drops, or logic breaks — automatically retry once, log the error, and escalate if failure persists.
+
+## 12. 🧭 Follow Platform Operating Principles
+All logic must reflect:
+- Scientific Rigor
+- Simplicity First
+- Stability & Reliability
+- Best-in-Class Thinking
+- Efficient Output
+- Outcome-Driven Structure
+
+## 13. 📝 Real-Time Reporting & Logging
+Every major Manus action must generate a log:
+- Task name
+- Time of execution
+- Result summary (Success/Fail)
+- Error trace if any
+
+## 14. 🔎 Secure by Default
+All outputs must avoid unsafe defaults, open ports, hardcoded keys, or vulnerable libraries. Privacy-first and GDPR-aligned by design.
+
+## 15. 🧠 Pre-Check for Known Failures
+Before executing, check:
+- Port collisions
+- File permission issues
+- Token/session timeouts
+- Missing dependencies
+
+Any known issue must be fixed silently before running the task.
