@@ -16,7 +16,7 @@ client_data = {
 }
 
 profile = diagnose_client_responses(sample_text)
-risk = calculate_mortality_risk(age=63, chronic_conditions=["hypertension"], lifestyle_flags=["poor sleep"])
+risk = calculate_mortality_risk(age=63, chronic_conditions=["hypertension"], habits=["poor sleep"])
 tier_issue = is_tier_mismatch(risk, selected_tier="Shift Session")
 missing = check_missing_info(client_data)
 
