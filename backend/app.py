@@ -32,11 +32,19 @@ def create_app(config_class=Config):
     from blueprints.api import api_bp
     from blueprints.admin import admin_bp
     from blueprints.coach import coach_bp
+    from blueprints.onboarding import onboarding_bp
+    from blueprints.webhooks import webhooks_bp
+    from blueprints.dashboard import dashboard_bp
+    from blueprints.health import health_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(coach_bp, url_prefix='/coach')
+    app.register_blueprint(onboarding_bp)
+    app.register_blueprint(webhooks_bp)
+    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(health_bp)
     
     with app.app_context():
         db.create_all()
