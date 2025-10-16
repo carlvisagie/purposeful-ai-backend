@@ -36,6 +36,7 @@ def create_app(config_class=Config):
     from blueprints.webhooks import webhooks_bp
     from blueprints.dashboard import dashboard_bp
     from blueprints.health import health_bp
+    from blueprints.admin_extended import admin_extended_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(api_bp, url_prefix='/api')
@@ -45,6 +46,7 @@ def create_app(config_class=Config):
     app.register_blueprint(webhooks_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(health_bp)
+    app.register_blueprint(admin_extended_bp)
     
     with app.app_context():
         db.create_all()
