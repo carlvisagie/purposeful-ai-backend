@@ -102,11 +102,29 @@ class ErrorMonitor:
             
             logger.critical(alert_message)
             
-            # TODO: Integrate with alerting service (Slack, PagerDuty, etc.)
-            # Example:
-            # slack_webhook = os.getenv('SLACK_WEBHOOK_URL')
-            # if slack_webhook:
-            #     requests.post(slack_webhook, json={'text': alert_message})
+            # Integrate with alerting services
+            # Send to Slack if webhook configured
+            slack_webhook = os.getenv('SLACK_WEBHOOK_URL')
+            if slack_webhook:
+                try:
+                    import requests
+                    requests.post(slack_webhook, json={'text': alert_message}, timeout=5)
+                except Exception as e:
+                    logger.error(f"Failed to send Slack alert: {e}")
+            
+            # Send email alert if configured
+            alert_email = os.getenv('ALERT_EMAIL')
+            if alert_email:
+                try:
+                    from services.google_workspace_service import GoogleWorkspaceService
+                    google_service = GoogleWorkspaceService()
+                    google_service.send_email(
+                        to_email=alert_email,
+                        subject=f"🚨 Error Alert: {error_data['error_type']}",
+                        body=alert_message
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to send email alert: {e}")
             
         except Exception as e:
             logger.critical(f"Failed to send error alert: {e}")

@@ -375,8 +375,16 @@ def _send_appointment_confirmations(user: User, appointment: Appointment):
             appointment.confirmation_sent = True
             appointment.confirmation_sent_at = datetime.utcnow()
         
-        # Send email confirmation (via SendGrid or Google Workspace)
-        # TODO: Implement email confirmation
+        # Send email confirmation
+        try:
+            google_service = GoogleWorkspaceService()
+            google_service.send_email(
+                to_email=user.email,
+                subject="Appointment Confirmed - Purposeful Live Coaching",
+                body=f"""Hi {user.first_name},\n\nYour coaching session has been confirmed!\n\nDate: {appointment.scheduled_at.strftime('%B %d, %Y')}\nTime: {appointment.scheduled_at.strftime('%I:%M %p')}\n\nZoom Link: {appointment.zoom_join_url}\n\nWe look forward to seeing you!\n\nBest regards,\nPurposeful Live Coaching Team"""
+            )
+        except Exception as e:
+            logger.error(f"Failed to send confirmation email: {str(e)}")
         
         db.session.commit()
         

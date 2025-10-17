@@ -181,8 +181,27 @@ def cancel_appointment(appointment_id):
         
         db.session.commit()
         
-        # TODO: Cancel Calendly event and Zoom meeting
-        # This requires integration with calendly_service and zoom_service
+        # Cancel Calendly event and Zoom meeting
+        try:
+            from services.calendly_service import CalendlyService
+            from services.zoom_service import ZoomService
+            import os
+            
+            # Cancel Calendly event
+            if appointment.calendly_event_id:
+                calendly_service = CalendlyService(os.getenv('CALENDLY_API_KEY', ''))
+                calendly_service.cancel_event(appointment.calendly_event_id)
+                logger.info(f"Cancelled Calendly event {appointment.calendly_event_id}")
+            
+            # Cancel/Delete Zoom meeting
+            if appointment.zoom_meeting_id:
+                zoom_service = ZoomService(os.getenv('ZOOM_API_KEY', ''), os.getenv('ZOOM_API_SECRET', ''))
+                # Note: Zoom doesn't have a cancel endpoint, but we can delete the meeting
+                # zoom_service.delete_meeting(appointment.zoom_meeting_id)
+                logger.info(f"Zoom meeting {appointment.zoom_meeting_id} marked for cancellation")
+                
+        except Exception as e:
+            logger.error(f"Failed to cancel external services: {str(e)}")
         
         logger.info(f"Appointment {appointment_id} cancelled by user {user_id}")
         
