@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Follow-Up</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f5;">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td align="center" style="padding: 40px 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%); padding: 40px; text-align: center; border-radius: 8px 8px 0 0;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">Thank You for Your Session</h1>
+                        </td>
+                    </tr>
+                    
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px;">
+                            <h2 style="margin: 0 0 20px 0; color: #333333; font-size: 24px;">Hi {{first_name}},</h2>
+                            
+                            <p style="margin: 0 0 20px 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                                Thank you for your coaching session today. It was great working with you, and I'm excited about the progress you're making on your journey.
+                            </p>
+                            
+                            <!-- Session Summary Box -->
+                            <table role="presentation" style="width: 100%; background-color: #f8f9fa; border-left: 4px solid #9C27B0; padding: 20px; margin: 20px 0;">
+                                <tr>
+                                    <td>
+                                        <p style="margin: 0 0 10px 0; color: #333333; font-size: 18px; font-weight: 600;">
+                                            Session Summary
+                                        </p>
+                                        <p style="margin: 0 0 5px 0; color: #666666; font-size: 14px;">
+                                            Date: {{session_date}}
+                                        </p>
+                                        <p style="margin: 0; color: #666666; font-size: 14px;">
+                                            Duration: {{duration}} minutes
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            {% if recording_url %}
+                            <h3 style="margin: 30px 0 15px 0; color: #333333; font-size: 18px;">Session Recording</h3>
+                            
+                            <p style="margin: 0 0 20px 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                                Your session recording is now available. You can review it anytime to reinforce key insights and action items.
+                            </p>
+                            
+                            <!-- Recording Button -->
+                            <table role="presentation" style="margin: 20px 0;">
+                                <tr>
+                                    <td align="center">
+                                        <a href="{{recording_url}}" style="display: inline-block; padding: 16px 32px; background-color: #9C27B0; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px;">
+                                            View Recording
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            {% endif %}
+                            
+                            <h3 style="margin: 30px 0 15px 0; color: #333333; font-size: 18px;">Action Items</h3>
+                            
+                            <p style="margin: 0 0 15px 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                                Here are the key action items we discussed:
+                            </p>
+                            
+                            <ul style="margin: 0 0 20px 0; padding-left: 20px; color: #666666; font-size: 16px; line-height: 1.8;">
+                                <li>Review and reflect on today's insights</li>
+                                <li>Complete the exercises we discussed</li>
+                                <li>Track your progress in your journal</li>
+                                <li>Prepare questions for our next session</li>
+                            </ul>
+                            
+                            <h3 style="margin: 30px 0 15px 0; color: #333333; font-size: 18px;">Next Steps</h3>
+                            
+                            <p style="margin: 0 0 20px 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                                Continue building on the momentum from today's session. Remember, transformation happens through consistent action and self-reflection.
+                            </p>
+                            
+                            <!-- Dashboard Button -->
+                            <table role="presentation" style="margin: 20px 0;">
+                                <tr>
+                                    <td align="center">
+                                        <a href="{{dashboard_url}}" style="display: inline-block; padding: 12px 24px; background-color: #f5f5f5; color: #333333; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 14px; border: 1px solid #ddd;">
+                                            Go to Dashboard
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="margin: 30px 0 0 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                                Looking forward to our next session!
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f8f9fa; padding: 30px; text-align: center; border-radius: 0 0 8px 8px;">
+                            <p style="margin: 0 0 10px 0; color: #999999; font-size: 14px;">
+                                © 2025 Purposeful Live Coaching. All rights reserved.
+                            </p>
+                            <p style="margin: 0; color: #999999; font-size: 14px;">
+                                Questions? <a href="mailto:support@purposefullivecoaching.academy" style="color: #9C27B0; text-decoration: none;">Contact Support</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

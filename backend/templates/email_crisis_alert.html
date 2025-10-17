@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urgent: Client Crisis Alert</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f5f5f5;">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td align="center" style="padding: 40px 0;">
+                <table role="presentation" style="width: 600px; max-width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: 3px solid #F44336;">
+                    <!-- Header -->
+                    <tr>
+                        <td style="background-color: #F44336; padding: 40px; text-align: center; border-radius: 8px 8px 0 0;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">🚨 Crisis Alert</h1>
+                        </td>
+                    </tr>
+                    
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px;">
+                            <table role="presentation" style="width: 100%; background-color: #FFEBEE; border-left: 4px solid #F44336; padding: 20px; margin: 0 0 20px 0;">
+                                <tr>
+                                    <td>
+                                        <p style="margin: 0; color: #C62828; font-size: 16px; font-weight: 600;">
+                                            ⚠️ IMMEDIATE ATTENTION REQUIRED
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <h2 style="margin: 0 0 20px 0; color: #333333; font-size: 24px;">Crisis Level: {{crisis_level}}</h2>
+                            
+                            <p style="margin: 0 0 20px 0; color: #666666; font-size: 16px; line-height: 1.6;">
+                                A crisis alert has been triggered for one of your clients. Please review the details below and take appropriate action immediately.
+                            </p>
+                            
+                            <!-- Client Details Box -->
+                            <table role="presentation" style="width: 100%; background-color: #f8f9fa; padding: 20px; margin: 20px 0;">
+                                <tr>
+                                    <td>
+                                        <p style="margin: 0 0 10px 0; color: #333333; font-size: 16px;">
+                                            <strong>Client:</strong> {{client_name}}
+                                        </p>
+                                        <p style="margin: 0 0 10px 0; color: #333333; font-size: 16px;">
+                                            <strong>Email:</strong> {{client_email}}
+                                        </p>
+                                        <p style="margin: 0 0 10px 0; color: #333333; font-size: 16px;">
+                                            <strong>Phone:</strong> {{client_phone}}
+                                        </p>
+                                        <p style="margin: 0; color: #333333; font-size: 16px;">
+                                            <strong>Alert Time:</strong> {{alert_time}}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <h3 style="margin: 30px 0 15px 0; color: #333333; font-size: 18px;">Alert Details</h3>
+                            
+                            <p style="margin: 0 0 20px 0; color: #666666; font-size: 16px; line-height: 1.6; background-color: #FFF3E0; padding: 15px; border-left: 4px solid #FF9800;">
+                                {{alert_message}}
+                            </p>
+                            
+                            <h3 style="margin: 30px 0 15px 0; color: #333333; font-size: 18px;">Recommended Actions</h3>
+                            
+                            <ul style="margin: 0 0 20px 0; padding-left: 20px; color: #666666; font-size: 16px; line-height: 1.8;">
+                                <li><strong>Contact the client immediately</strong> via phone or preferred communication method</li>
+                                <li>Assess the situation and level of risk</li>
+                                <li>Provide appropriate crisis intervention support</li>
+                                <li>If necessary, guide client to emergency services (911 or crisis hotline)</li>
+                                <li>Document all interactions and actions taken</li>
+                                <li>Follow up within 24 hours</li>
+                            </ul>
+                            
+                            <!-- Emergency Resources Box -->
+                            <table role="presentation" style="width: 100%; background-color: #E3F2FD; border-left: 4px solid #2196F3; padding: 20px; margin: 20px 0;">
+                                <tr>
+                                    <td>
+                                        <p style="margin: 0 0 10px 0; color: #333333; font-size: 16px; font-weight: 600;">
+                                            Emergency Resources
+                                        </p>
+                                        <p style="margin: 0 0 5px 0; color: #666666; font-size: 14px;">
+                                            <strong>National Suicide Prevention Lifeline:</strong> 988
+                                        </p>
+                                        <p style="margin: 0 0 5px 0; color: #666666; font-size: 14px;">
+                                            <strong>Crisis Text Line:</strong> Text HOME to 741741
+                                        </p>
+                                        <p style="margin: 0; color: #666666; font-size: 14px;">
+                                            <strong>Emergency Services:</strong> 911
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Action Buttons -->
+                            <table role="presentation" style="margin: 30px 0;">
+                                <tr>
+                                    <td align="center">
+                                        <a href="{{admin_dashboard_url}}" style="display: inline-block; padding: 16px 32px; background-color: #F44336; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px; margin-right: 10px;">
+                                            View in Dashboard
+                                        </a>
+                                        <a href="mailto:{{client_email}}" style="display: inline-block; padding: 16px 32px; background-color: #2196F3; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px;">
+                                            Email Client
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="margin: 30px 0 0 0; color: #C62828; font-size: 14px; line-height: 1.6; font-weight: 600;">
+                                This is an automated alert. Please acknowledge receipt and document your response in the admin dashboard.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f8f9fa; padding: 30px; text-align: center; border-radius: 0 0 8px 8px;">
+                            <p style="margin: 0 0 10px 0; color: #999999; font-size: 14px;">
+                                © 2025 Purposeful Live Coaching. All rights reserved.
+                            </p>
+                            <p style="margin: 0; color: #999999; font-size: 14px;">
+                                This is a critical system alert. Do not ignore.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+
