@@ -121,7 +121,7 @@ class Notification(db.Model):
     external_id = Column(String(100))  # Twilio message SID, SendGrid message ID, etc.
     
     # Metadata
-    metadata = Column(Text)  # JSON string for additional data
+    notification_metadata = Column(Text)  # JSON string for additional data
     
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
