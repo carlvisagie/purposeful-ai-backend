@@ -7,9 +7,11 @@ import os
 load_dotenv()
 from flask_jwt_extended import JWTManager
 from config import Config
-from models import db
+from .models import db   # ← FIXED IMPORT
 import logging
 from datetime import timedelta
+
+
 
 def create_app(config_class=Config):
     app = Flask(__name__)
